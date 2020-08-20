@@ -19,12 +19,15 @@
   </properties>
 
   <dependencies>
+
+    <!--但也测试工具包-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!---->
 
     <!--mysql 驱动-->
     <dependency>
