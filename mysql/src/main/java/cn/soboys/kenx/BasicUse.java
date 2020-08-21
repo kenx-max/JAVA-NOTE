@@ -16,6 +16,7 @@ import java.sql.*;
  * com.mysql.cj.jdbc.Driver  新的数据库驱动
  */
 public class BasicUse {
+    private long startTime;
 
     public Connection getConnection() {
 

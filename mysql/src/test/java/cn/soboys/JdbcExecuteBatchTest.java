@@ -1,11 +1,28 @@
 package cn.soboys;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.soboys.kenx.JDBCExecuteBatch;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class JdbcExecuteBatchTest {
     JDBCExecuteBatch jdbcExecuteBatch = new JDBCExecuteBatch();
+    private long startTime;
+
+    @Before
+    public void  testBefor(){
+        startTime=System.currentTimeMillis();
+
+    }
+
+    @After
+    public void testAfter(){
+        long useTime=System.currentTimeMillis()-startTime;
+        System.out.println("执行方法时间"+ DateUtil.formatBetween(useTime));
+
+    }
 
     @Test
     public void insBatch() {

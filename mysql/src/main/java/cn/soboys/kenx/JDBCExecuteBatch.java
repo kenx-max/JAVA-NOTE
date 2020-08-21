@@ -61,7 +61,7 @@ public class JDBCExecuteBatch {
             connection = basicUse.getConnection();
             //获取发送sql指令执行sql对象
             statement = connection.createStatement();
-            for (int i = 1; i < 10; i++) {
+            for (int i = 12; i <= 16; i++) {
                 StringBuffer sbf = new StringBuffer("update student set  hobby='足球'");
                 sbf.append(" where id=" + i);
                 sql = sbf.toString();
