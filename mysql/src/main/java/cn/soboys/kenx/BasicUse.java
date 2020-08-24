@@ -3,6 +3,7 @@ package cn.soboys.kenx;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.ObjectId;
+import cn.hutool.core.util.StrUtil;
 
 import java.sql.*;
 
@@ -175,6 +176,31 @@ public class BasicUse {
 
         }
     }
+
+
+    public  void closeConnection(ResultSet rs,Statement statement,Connection connection){
+        //关闭数据库的资源的顺序最好与使用的顺序相反
+        try{
+            if(!StrUtil.isEmptyIfStr(rs)){
+                rs.close();
+            }
+            if(!StrUtil.isEmptyIfStr(statement)){
+                statement.close();
+            }
+
+            if(!StrUtil.isEmptyIfStr(connection)){
+                connection.close();
+            }
+
+            statement.close();
+
+        }catch (Exception e){
+            System.out.println("资源释放错误");
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 }
