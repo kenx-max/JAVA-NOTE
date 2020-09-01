@@ -1,0 +1,45 @@
+<c3p0-config>
+    <!-- 使用默认的配置读取连接池对象 如果没有指定则使用这个配置 -->
+    <default-config>
+        <!--  连接参数 -->
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://47.93.197.238:3306/test</property>
+        <property name="user">root</property>
+        <property name="password">root123456</property>
+
+        <!-- 连接池参数 -->
+        <!--初始化的申请的连接数量-->
+        <property name="initialPoolSize">5</property>
+        <!--最大的连接数量-->
+        <property name="maxPoolSize">10</property>
+        <!--连接超时时间-->
+        <property name="checkoutTimeout">3000</property>
+    </default-config>
+
+    <name-config name="myc3p0">
+        <!--driverClass用于配置驱动包 -->
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+
+        <!-- jdbc数据库地址 -->
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/kenx_test?characterEncoding=utf-8</property>
+        <!--mysql的登陆名-->
+        <property name="user">root</property>
+        <!--如果没密码就可以设置成<property name="password"></property>-->
+        <property name="password">root</property>
+
+        <!-- 初始化数据库连接池时连接的数量 -->
+        <property name="initialPoolSize">20</property>
+        <!-- 数据库连接池中的最大的数据库连接数 -->
+        <property name="maxPoolSize">25</property>
+        <!-- 最多等待多少秒显示超时 -->
+        <property name="checkoutTimeout">30000</property>
+        <!-- 如果池中数据连接不够时一次增长多少个 -->
+        <property name="acquireIncrement">5</property>
+        <!-- 数据库连接池中的最小的数据库连接数 -->
+        <property name="minPoolSize">5</property>
+    </name-config>
+
+</c3p0-config>
+        <!-- 创建数据库连接池时，不传参数默认指default-config中参数，传入参数，则根据<name-config name="myc3p0">中的名字去找
+ ComboPooledDataSource cpds = new ComboPooledDataSource();-->
+
