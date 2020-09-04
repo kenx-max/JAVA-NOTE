@@ -1,5 +1,6 @@
 ## 日志等级
 ![图片](https://images.soboys.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwMTE5MDE0NTU1Mjk3.png)
+
 图片上是比较常用的日志等级实际上有8个级别（除去OFF和ALL，可以说分为6个级别），优先级从高到低依次为：**OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、 ALL**
 1. **ALL** 最低等级的，用于打开所有日志记录。
 2. **TRACE** designates finer-grained informational events than the DEBUG.Since:1.2.12，很低的日志级别，一般不会使用。
@@ -9,6 +10,7 @@
 6. **ERROR** 指出虽然发生错误事件，但仍然不影响系统的继续运行。打印错误和异常信息，如果不想输出太多的日志，可以使用这个级别。
 7. **FATAL** 指出每个严重的错误事件将会导致应用程序的退出。这个级别比较高了。重大错误，这种级别你可以直接停止程序了。
 8. **OFF** 最高等级的，用于关闭所有日志记录。
+
 如果将**log level**设置在某一个级别上，那么比此级别优先级**高的log**都能打印出来。例如，如果设置优先级为WARN，那么OFF、FATAL、ERROR、WARN 4个级别的log能正常输出，而INFO、DEBUG、TRACE、 ALL级别的log则会被忽略。Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。
 ## logback配置
 在项目中使用logback时，它会默认在项目的classpath路径下按顺序查找名为logback-test.xml、logback.groovy、logback.xml的文件，如果上述文件均未找到，则使用默认配置（debug级别）将日志输出到控制台。
