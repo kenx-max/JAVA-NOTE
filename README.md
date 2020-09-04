@@ -13,7 +13,7 @@
 
 如果将**log level**设置在某一个级别上，那么比此级别优先级**高的log**都能打印出来。例如，如果设置优先级为WARN，那么OFF、FATAL、ERROR、WARN 4个级别的log能正常输出，而INFO、DEBUG、TRACE、 ALL级别的log则会被忽略。Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。
 ## logback配置
-在项目中使用logback时，它会默认在项目的classpath路径下按顺序查找名为logback-test.xml、logback.groovy、logback.xml的文件，如果上述文件均未找到，则使用默认配置（debug级别）将日志输出到控制台。
+在项目中使用**logback**时，它会默认在项目的**classpath**路径下按顺序查找名为**logback-test.xml、logback.groovy、logback.xml**的文件，如果上述文件均未找到，则使用**默认配置（debug级别）将日志输出到控制台**。
 
 在没有对logback进行配置的情况下，可以进行简单的日志输出，代码如下：
 ```java
@@ -43,6 +43,7 @@ public class LogBack {
 12:45:35.892 [main] INFO cn.soboys.logback.LogBack - logback info测试
 12:45:35.892 [main] DEBUG cn.soboys.logback.LogBack - logback debug测试
 ```
+
 
 
 
