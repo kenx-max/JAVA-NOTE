@@ -37,7 +37,7 @@ public class LogBack {
 
 ```
 运行上面代码，可以在控制台有以下信息输出（默认输出格式为 %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n）：
-```log
+```java
 12:45:35.889 [main] ERROR cn.soboys.logback.LogBack - logback error测试
 12:45:35.892 [main] WARN cn.soboys.logback.LogBack - logback warn 测试
 12:45:35.892 [main] INFO cn.soboys.logback.LogBack - logback info测试
