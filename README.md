@@ -90,7 +90,7 @@ public class LogBack {
 configuration作为logback配置文件的根节点，有**scan、sacnPeriod、debug**等属性。
 
 1. **debug**: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
-(为true时和上面在**logBack1**的main方法加入的两行代码效果相同)
+(为true时和上面在logBack1的main方法加入的两行代码效果相同)
 2. **scan**: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
 3. **scanPeriod**: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是**毫秒**。当scan为true时，此属性生效。默认的时间间隔为1分钟。
 4. **packagingData**：当此属性设置为true时，logback可以包含它输出的堆栈跟踪行的每一行的打包数据。打包数据由jar文件的名称和版本组成，而这个jar文件是由堆栈跟踪线的类产生的。默认值为false。它也可以通过java方式启用：
@@ -98,8 +98,10 @@ configuration作为logback配置文件的根节点，有**scan、sacnPeriod、de
 ```xml
 <configuration scan="true" scanPeriod="60 seconds" debug="false" packagingData="false">
 </configuration>
-
 ```
+### configuration appender
+指定日志输出的位置它接受两个强制性的属性（name和class）。name属性指定appender的名称，而class属性指定要实例化的appender类的完全限定名
+常用的appender的有**ConsoleAppender，FileAppender，RollingFileAppender**
 
 
 
