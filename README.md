@@ -15,4 +15,35 @@
 ## logback配置
 在项目中使用logback时，它会默认在项目的classpath路径下按顺序查找名为logback-test.xml、logback.groovy、logback.xml的文件，如果上述文件均未找到，则使用默认配置（debug级别）将日志输出到控制台。
 
+在没有对logback进行配置的情况下，可以进行简单的日志输出，代码如下：
+```java
+package cn.soboys.logback;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class LogBack {
+    private final static Logger logger = LoggerFactory.getLogger(LogBack.class);
+
+    public static void main(String[] args) {
+        logger.error("logback error测试");
+        logger.warn("logback warn 测试");
+        logger.info("logback info测试");
+        logger.debug("logback debug测试");
+        logger.trace("logback trace测试");
+    }
+}
+
+```
+运行上面代码，可以在控制台有以下信息输出（默认输出格式为 %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n）：
+```log
+12:45:35.889 [main] ERROR cn.soboys.logback.LogBack - logback error测试
+12:45:35.892 [main] WARN cn.soboys.logback.LogBack - logback warn 测试
+12:45:35.892 [main] INFO cn.soboys.logback.LogBack - logback info测试
+12:45:35.892 [main] DEBUG cn.soboys.logback.LogBack - logback debug测试
+```
+
+
+
 
