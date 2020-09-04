@@ -15,6 +15,28 @@
 ## logback配置
 在项目中使用**logback**时，它会默认在项目的**classpath**路径下按顺序查找名为**logback-test.xml、logback.groovy、logback.xml**的文件，如果上述文件均未找到，则使用**默认配置（debug级别）将日志输出到控制台**。
 
+可以通过Printing Logger Status来知道logback内部状态
+
+```java
+class logBack1 {
+    private final static Logger logger = LoggerFactory.getLogger(LogBack.class);
+
+    public static void main(String[] args) {
+        // 打印内部的状态
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        StatusPrinter.print(lc);
+    }
+}
+```
+运行内容如下：
+```text
+13:06:09,042 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+13:06:09,043 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+13:06:09,043 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.xml]
+13:06:09,048 |-INFO in ch.qos.logback.classic.BasicConfigurator@7daf6ecc - Setting up default configuration.
+
+```
+
 在没有对logback进行配置的情况下，可以进行简单的日志输出，代码如下：
 ```java
 package cn.soboys.logback;
