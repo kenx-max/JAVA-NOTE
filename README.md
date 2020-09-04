@@ -65,6 +65,9 @@ public class LogBack {
 12:45:35.892 [main] INFO cn.soboys.logback.LogBack - logback info测试
 12:45:35.892 [main] DEBUG cn.soboys.logback.LogBack - logback debug测试
 ```
+可以看到，在项目没有对logback进行配置时，logback可以使用默认配置输出简单的日志到控制台，但在实际工作中，
+我们通常对项目日志有更为严格的要求，比如将日志按日期每天产生日志文件、将日志按文件大小进行分割、定期删除日志等。因此需要在项目中建立logback的配置文件，当在项目的classpath路径下存在logback.xml（或者logback-test.xml、logback.groovy）,logback能够自动扫描到它并读取配置，下面是一个最基本的logback配置文件。
+
 
 
 
