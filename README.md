@@ -76,7 +76,7 @@ public class LogBack {
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -169,6 +169,69 @@ FileAppender，一个OutputStreamAppender的子类，将日志事件附加到一
   <root level="DEBUG">
     <appender-ref ref="FILE" />
   </root>
+</configuration>
+```
+#### RollingFileAppender
+RollingFileAppender将FileAppender扩展为可**翻转日志文件的功能**。例如，RollingFileAppender可以记录日志到一个名为log.txt的文件，一旦满足一定条件，
+将其日志目标更改为另一个文件。在使用时，RollingFileAppender必须同时具有RollingPolicy和TriggeringPolicy设置。
+但是，如果它的RollingPolicy也实现TriggeringPolicy接口，那么只需要显式地指定前者。
+
+**TimeBasedRollingPolicy**
+时间基准滚动策略可能是最流行的滚动策略。它定义了一个基于时间的滚动策略，例如逐日或逐月。时间的滚动策略承担了翻转的责任，同时也承担了触发的滚动。事实上,TimeBasedTriggeringPolicy实现RollingPolicy和TriggeringPolicy接口。
+```xml
+<configuration>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logFile.log</file>
+    <!--指定日志翻转触发条件
+        TimeBasedRollingPolicy 基于时间触发
+     -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- 滚动策略
+            每月
+      -->
+      <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+      <!-- 保留30天的历史记录 -->
+      <maxHistory>30</maxHistory>
+       <!--上限为3GB--> 
+      <totalSizeCap>3GB</totalSizeCap>
+
+    </rollingPolicy>
+
+    <encoder>
+       <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender> 
+
+  <root level="DEBUG">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>
+```
+**SizeAndTimeBasedRollingPolicy**
+有时，可能希望按日期对文件进行存档，但同时限制每个日志文件的大小，这时候可以使用SizeAndTimeBasedRollingPolicy达到目的
+```xml
+<configuration>
+  <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>mylog.txt</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+       <!-- 每个文件最多100MB，保留60天的历史记录，但最多20GB -->
+       <maxFileSize>100MB</maxFileSize>    
+       <maxHistory>60</maxHistory>
+       <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <root level="DEBUG">
+    <appender-ref ref="ROLLING" />
+  </root>
+
 </configuration>
 
 ```
