@@ -66,7 +66,42 @@ public class LogBack {
 12:45:35.892 [main] DEBUG cn.soboys.logback.LogBack - logback debug测试
 ```
 可以看到，在项目没有对logback进行配置时，logback可以使用默认配置输出简单的日志到控制台，但在实际工作中，
-我们通常对项目日志有更为严格的要求，比如将日志按日期每天产生日志文件、将日志按文件大小进行分割、定期删除日志等。因此需要在项目中建立logback的配置文件，当在项目的classpath路径下存在logback.xml（或者logback-test.xml、logback.groovy）,logback能够自动扫描到它并读取配置，下面是一个最基本的logback配置文件。
+我们通常对项目日志有更为严格的要求，比如将日志按日期每天产生日志文件、将日志按文件大小进行分割、定期删除日志等。因此需要在项目中建立logback的配置文件，当在项目的classpath路径下存在logback.xml（或者logback-test.xml、logback.groovy）,logback能够自动扫描到它并读取配置，
+
+下面是一个最基本的logback配置文件。
+```xml
+<configuration>
+    <!--指定日志输出位置-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--指定日志级别-->
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+```
+### configuration
+configuration作为logback配置文件的根节点，有**scan、sacnPeriod、debug**等属性。
+
+1. **debug**: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+(为true时和上面在**logBack1**的main方法加入的两行代码效果相同)
+2. **scan**: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+3. **scanPeriod**: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是**毫秒**。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+4. **packagingData**：当此属性设置为true时，logback可以包含它输出的堆栈跟踪行的每一行的打包数据。打包数据由jar文件的名称和版本组成，而这个jar文件是由堆栈跟踪线的类产生的。默认值为false。它也可以通过java方式启用：
+综合上面所述，configuration的配置如下：
+```xml
+<configuration scan="true" scanPeriod="60 seconds" debug="false" packagingData="false">
+</configuration>
+
+```
+
+
 
 
 
