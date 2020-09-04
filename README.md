@@ -99,14 +99,76 @@ configuration作为logback配置文件的根节点，有**scan、sacnPeriod、de
 <configuration scan="true" scanPeriod="60 seconds" debug="false" packagingData="false">
 </configuration>
 ```
-### configuration appender
+### appender
 指定日志输出的位置它接受两个强制性的属性（name和class）。name属性指定appender的名称，而class属性指定要实例化的appender类的完全限定名
 常用的appender的有**ConsoleAppender，FileAppender，RollingFileAppender**
+#### ConsoleAppender
+顾名思义，在控制台上追加。示例：
+```xml
+<configuration>
 
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
 
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
+```
+#### FileAppender
+FileAppender，一个OutputStreamAppender的子类，将日志事件附加到一个文件中。目标文件由文件选项指定。如果该文件已经存在，
+它将根据附加属性的值被追加或截断。示例
+```xml
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!--日志文件名
+          路径：当前项目根目录没有就新建
+        -->
+        <file>testFile.log</file>
+        <!--写入方式
+            true：追加写入
+            false：清空写如
+        -->
+        <append>true</append>
+        <!-- 设置为false可获得更高的日志记录吞吐量 -->
+        <immediateFlush>true</immediateFlush>
+        
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
+    <root level="DEBUG">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
+```
+在应用程序开发阶段或短期应用程序(例如批处理应用程序)期间，希望在每个新应用程序启动时创建一个新的日志文件。这在**timestamp**元素的帮助下很容易做到。示例：
+```xml
+<configuration>
 
+  <!-- 定义一个时间戳 属性值为后续配置文件使用-->
+  <timestamp key="bySecond" datePattern="yyyy-MM-dd HH:mm:ss"/>
 
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!--使用先前创建的时间戳创建唯一
+                  命名日志文件-->
+    <file>log-${bySecond}.txt</file>
+    <encoder>
+      <pattern>%logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
 
+  <root level="DEBUG">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>
 
-
+```
