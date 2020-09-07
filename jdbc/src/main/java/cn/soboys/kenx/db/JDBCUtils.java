@@ -46,6 +46,7 @@ public class JDBCUtils {
 
     }
 
+    //关闭数据库的资源的顺序最好与使用的顺序相反
     public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
         if (rs != null) {
             try {

@@ -1,0 +1,22 @@
+<configuration>
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>mylog.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <!-- 每个文件最多100MB，保留60天的历史记录，但最多20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="DEBUG">
+        <appender-ref ref="ROLLING" />
+    </root>
+
+</configuration>
